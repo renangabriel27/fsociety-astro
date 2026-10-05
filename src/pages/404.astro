@@ -1,0 +1,40 @@
+---
+// Errors titled like season 4 episodes (HTTP 4xx status codes), with the fsociety mask in ASCII
+import Prompt from '../components/Prompt.astro';
+import { theme } from '../config';
+import Layout from '../layouts/Layout.astro';
+import { t } from '../lib/i18n';
+import { url } from '../lib/url';
+
+const mask = `
+            ___________
+           |           |
+           |           |
+        ___|___________|___
+       /                   \\
+      |   ____       ____   |
+      |  / () \\     / () \\  |
+      |  \\____/  ^  \\____/  |
+      |   .~~~~~~~~~~~~~.   |
+       \\  (_____________)  /
+        \\    \\_______/    /
+         '-.___________.-'`;
+---
+<Layout template="error-template" title="404 Not Found">
+    <main class="gh-main gh-outer">
+        <section class="gh-error gh-inner">
+
+            <pre class="gh-error-mask" aria-hidden="true">{mask}</pre>
+
+            <div class="gh-error-body">
+                <Prompt command={t('curl -I ./this-page')} />
+                <h1 class="gh-error-code is-title" data-text="404">404</h1>
+                <p class="gh-error-title">Not Found</p>
+                <p class="gh-error-message">{t('The page you were looking for was deleted, moved, or never existed.')}</p>
+                <blockquote class="gh-error-quote">{theme.footerTagline || t('Control is an illusion.')}</blockquote>
+                <a class="gh-button" href={url('/')}>cd ~</a>
+            </div>
+
+        </section>
+    </main>
+</Layout>

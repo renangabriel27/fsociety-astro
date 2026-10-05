@@ -1,0 +1,10 @@
+[
+    {
+        "id": "elliot",
+        "name": "Elliot",
+        "bio": "Cybersecurity engineer by day. Writes about security, Linux and the systems that run the world.",
+        "location": "New York",
+        "website": "https://example.com",
+        "avatar": "../assets/authors/elliot.jpg"
+    }
+]

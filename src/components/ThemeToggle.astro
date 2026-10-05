@@ -1,0 +1,9 @@
+---
+// Dark/light toggle. Hidden without JS (the head script adds html.has-theme-toggle); main.js handles the click
+import { t } from '../lib/i18n';
+import Icon from './Icon.astro';
+---
+<button class="gh-theme-toggle gh-icon-button" type="button" aria-label={t('Switch between dark and light theme')} data-theme-toggle>
+    <Icon name="sun" />
+    <Icon name="moon" />
+</button>

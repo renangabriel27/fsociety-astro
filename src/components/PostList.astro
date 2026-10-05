@@ -1,0 +1,44 @@
+---
+// Post list numbered like episodes (eps1.0, eps1.1…), counting from the oldest post.
+// Only the home list is numbered: on tag and author pages the position isn't the global one.
+// Props: pagination, baseUrl (where page 1 lives), prompt (shows the prompt line with the title search),
+// episodes (numbers the rows like episodes, when theme.episodeNumbers is on)
+import { theme } from '../config';
+import { t } from '../lib/i18n';
+import { episode, getPosts, type Pagination } from '../lib/posts';
+import { url } from '../lib/url';
+import PostCard from './PostCard.astro';
+import Prompt from './Prompt.astro';
+
+interface Props {
+    pagination: Pagination;
+    baseUrl: string;
+    prompt?: boolean;
+    episodes?: boolean;
+}
+
+const { pagination, baseUrl, prompt = false } = Astro.props;
+const episodes = Astro.props.episodes && theme.episodeNumbers;
+const { page, pages, items } = pagination;
+const all = episodes ? await getPosts() : [];
+const pageUrl = (n: number) => url(n === 1 ? baseUrl : `${baseUrl.replace(/\/$/, '')}/page/${n}/`);
+---
+<section class="gh-container gh-outer">
+    <div class="gh-container-inner gh-inner">
+
+        {prompt && <Prompt command="ls -t ~/episodes" search />}
+
+        <div class:list={['gh-feed', { 'is-episodes': episodes }]}>
+            {items.map((post) => <PostCard post={post} episode={episodes ? episode(post, all) : undefined} />)}
+        </div>
+
+        {pages > 1 && (
+            <nav class="gh-pagination" aria-label={t('Pagination')}>
+                {page > 1 ? <a href={pageUrl(page - 1)}>{t('← Newer posts')}</a> : <span></span>}
+                <span class="gh-pagination-info">{page} / {pages}</span>
+                {page < pages ? <a href={pageUrl(page + 1)}>{t('Older posts →')}</a> : <span></span>}
+            </nav>
+        )}
+
+    </div>
+</section>

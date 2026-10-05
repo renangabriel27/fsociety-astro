@@ -1,0 +1,34 @@
+---
+// The home page (Ghost's home.hbs on page 1, index.hbs on the following pages)
+import { site, theme } from '../config';
+import { t } from '../lib/i18n';
+import type { Pagination } from '../lib/posts';
+import PostList from './PostList.astro';
+
+interface Props {
+    pagination: Pagination;
+}
+
+const { pagination } = Astro.props;
+const showIntro = theme.showHomeIntro && pagination.page === 1;
+---
+<main class="gh-main">
+
+    {showIntro && (
+        // Short-sided like the show's framing: the text sits in the lower-left corner, the rest is empty space
+        <section class="gh-intro gh-outer">
+            <div class="gh-intro-inner gh-inner">
+                <p class="gh-intro-hud" aria-hidden="true">
+                    <span>// {site.title}</span>
+                    <span>[ <i class="gh-rec"></i>{t('REC')} ]</span>
+                    <span>{t('connection: encrypted')}</span>
+                </p>
+                <h1 class="gh-intro-greeting is-title" data-typing={theme.typingAnimation ? '' : undefined}>{theme.introGreeting}</h1>
+                <p class="gh-intro-text">{theme.homeIntroText || site.description}</p>
+            </div>
+        </section>
+    )}
+
+    <PostList pagination={pagination} baseUrl="/" prompt episodes />
+
+</main>

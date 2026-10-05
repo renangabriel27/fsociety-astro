@@ -1,0 +1,32 @@
+[
+    {
+        "id": "security",
+        "name": "Security",
+        "description": "Defensive security: vulnerabilities, incidents and the humans in the loop."
+    },
+    {
+        "id": "linux",
+        "name": "Linux",
+        "description": "Daemons, kernels, backups and the boxes that never get rebooted."
+    },
+    {
+        "id": "engineering",
+        "name": "Engineering",
+        "description": "Debugging, time, and the bugs that hide between systems."
+    },
+    {
+        "id": "privacy",
+        "name": "Privacy",
+        "description": "Metadata, fingerprints and what you leave behind."
+    },
+    {
+        "id": "fundamentals",
+        "name": "Fundamentals",
+        "description": "Ones and zeroes. Everything else is built on them."
+    },
+    {
+        "id": "culture",
+        "name": "Culture",
+        "description": "Hacker culture, threat models and why any of this matters."
+    }
+]
